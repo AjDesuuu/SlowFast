@@ -1,0 +1,47 @@
+TRAIN:
+  ENABLE: False
+TEST:
+  ENABLE: True
+  DATASET: ava
+  BATCH_SIZE: 8
+  NUM_SPATIAL_CROPS: 1
+  NUM_ENSEMBLE_VIEWS: 1
+DATA:
+  NUM_FRAMES: 4
+  SAMPLING_RATE: 16
+  TRAIN_JITTER_SCALES: [256, 320]
+  TRAIN_CROP_SIZE: 224
+  TEST_CROP_SIZE: 224
+  INPUT_CHANNEL_NUM: [3]
+  PATH_TO_DATA_DIR: "/home/Aaron/datasets/ava-dataset-utils/ava"
+DETECTION:
+  ENABLE: True
+  ALIGNED: True
+  SPATIAL_SCALE_FACTOR: 16
+  ROI_XFORM_RESOLUTION: 7
+AVA:
+  FRAME_DIR: "/home/Aaron/datasets/ava-dataset-utils/ava/frames"
+  FRAME_LIST_DIR: "/home/Aaron/datasets/ava-dataset-utils/ava/frame_lists"
+  ANNOTATION_DIR: "/home/Aaron/datasets/ava-dataset-utils/ava/annotations"
+  TRAIN_LISTS: ["train.csv"]
+  TEST_LISTS: ["val.csv"]
+  TRAIN_PREDICT_BOX_LISTS: ["ava_train_predicted_boxes.csv"]
+  TEST_PREDICT_BOX_LISTS: ["ava_val_predicted_boxes.csv"]
+  GROUNDTRUTH_FILE: "ava_val_v2.2.csv"
+  EXCLUSION_FILE: "ava_val_excluded_timestamps_v2.2.csv"
+  LABEL_MAP_FILE: "ava_action_list_v2.2_for_activitynet_2019.pbtxt"
+  DETECTION_SCORE_THRESH: 0.9
+MODEL:
+  ARCH: mvit
+  MODEL_NAME: ViTLAVAModel
+  NUM_CLASSES: 80
+  DROPOUT_RATE: 0.5
+  HEAD_ACT: relu
+DATA_LOADER:
+  NUM_WORKERS: 4
+  PIN_MEMORY: True
+NUM_GPUS: 1
+NUM_SHARDS: 1
+RNG_SEED: 0
+OUTPUT_DIR: "/home/Aaron/SlowFast/vitl_ava_results"
+VITL_CHECKPOINT_PATH: "/home/Aaron/datasets/ava-dataset-utils/checkpoints/vitl16.pth.tar"
